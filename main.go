@@ -1,7 +1,6 @@
 package main
 
 import (
-  "fmt"
   "os"
 )
 
@@ -14,16 +13,24 @@ Usage:
 
 The commands are:
 
-      start     bootstrap your system to begin your day`
+      start     bootstrap your system to begin your day
+      end       close down your system to end your day
+      break     alert your team that you are on break
+      lunch     alert your team that you are on lunch`
 
 func main() {
   if len(os.Args[1:]) < 1 {
-    fmt.Println("Command not found")
-    fmt.Println(usage)
+    printError("Command not found")
+    printPlain(usage)
     os.Exit(42)
   }
 
-  fmt.Println(usage)
+  switch {
+  case os.Args[1] == "start":
+    start(os.Args[2:])
+  default:
+    printPlain(usage)
+  }
 
   // always exit
   os.Exit(42)
