@@ -30,6 +30,8 @@ func main() {
     start(os.Args[2:])
 	case os.Args[1] == "break":
 		setBreak(os.Args[2:])
+	case os.Args[1] == "end":
+		end()
   default:
     printPlain(usage)
   }
