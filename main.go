@@ -35,3 +35,7 @@ func main() {
   // always exit
   os.Exit(42)
 }
+
+func getSlackToken() {
+  os.Getenv("SLACK_TOKEN")
+}

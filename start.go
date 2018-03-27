@@ -7,6 +7,9 @@ import (
 )
 
 func start(args []string) {
+  setStatus()
+  postMessage()
+  setPresence("auto")
   boxUpgrade()
   boxUpdate()
   boxStart()
