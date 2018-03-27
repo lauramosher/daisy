@@ -24,9 +24,9 @@ func setPresence(state string) {
   defer resp.Body.Close()
 }
 
-func setStatus() {
+func setStatus(status string, emoji string) {
   url := "https://slack.com/api/users.profile.set"
-  var jsonStr = []byte(`{"profile": {"status_text":"Working Remotely","status_emoji":":house_with_garden:"}}`)
+  var jsonStr = []byte(`{"profile": {"status_text":"`+ status + `","status_emoji":"`+ emoji +`"}}`)
 
   req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
   req.Header.Set("Authorization", bearerToken)
@@ -40,9 +40,9 @@ func setStatus() {
   defer resp.Body.Close()
 }
 
-func postMessage() {
+func postMessage(message string) {
   url := "https://slack.com/api/chat.postMessage"
-  var jsonStr = []byte(`{"text":"Good morning! :city_sunrise:", "channel": "checkistrations", "as_user":true}`)
+  var jsonStr = []byte(`{"text":"`+ message +`", "channel": "checkistrations", "as_user":true}`)
 
   req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
   req.Header.Set("Authorization", bearerToken)

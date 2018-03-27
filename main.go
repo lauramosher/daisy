@@ -28,14 +28,12 @@ func main() {
   switch {
   case os.Args[1] == "start":
     start(os.Args[2:])
+	case os.Args[1] == "break":
+		setBreak(os.Args[2:])
   default:
     printPlain(usage)
   }
 
   // always exit
   os.Exit(42)
-}
-
-func getSlackToken() {
-  os.Getenv("SLACK_TOKEN")
 }

@@ -7,8 +7,8 @@ import (
 )
 
 func start(args []string) {
-  setStatus()
-  postMessage()
+  setStatus("Working Remotely", ":house_with_garden:")
+  postMessage("Good morning! :city_sunrise:")
   setPresence("auto")
   boxUpgrade()
   boxUpdate()
