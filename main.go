@@ -31,7 +31,7 @@ func main() {
 	case os.Args[1] == "break":
 		setBreak(os.Args[2:])
 	case os.Args[1] == "end":
-		end()
+		end(os.Args[2:])
 	case os.Args[1] == "lunch":
 		lunch(os.Args[2:])
   default:
