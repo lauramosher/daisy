@@ -14,7 +14,7 @@ func useSlack() bool {
     return false
   }
   // TODO: flip this to true
-  return false
+  return true
 }
 
 func setPresence(state string) {
