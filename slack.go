@@ -8,7 +8,19 @@ import (
 
 var bearerToken = "Bearer " + os.Getenv("DAYSY_SLACK_USER_TOKEN")
 
+func useSlack() bool {
+  if len(os.Getenv("DAYSY_SLACK_USER_TOKEN")) == 0 {
+		printError("\u2757  Missing user token. Please see install instructions.")
+    return false
+  }
+  // TODO: flip this to true
+  return false
+}
+
 func setPresence(state string) {
+  if useSlack() == false {
+    return
+  }
   url := "https://slack.com/api/users.setPresence"
   var jsonStr = []byte(`{"presence":"`+ state +`"}`)
 
@@ -25,6 +37,9 @@ func setPresence(state string) {
 }
 
 func setStatus(status string, emoji string) {
+  if useSlack() == false {
+    return
+  }
   url := "https://slack.com/api/users.profile.set"
   var jsonStr = []byte(`{"profile": {"status_text":"`+ status + `","status_emoji":"`+ emoji +`"}}`)
 
@@ -41,6 +56,9 @@ func setStatus(status string, emoji string) {
 }
 
 func postMessage(message string) {
+  if useSlack() == false {
+    return
+  }
   url := "https://slack.com/api/chat.postMessage"
   var jsonStr = []byte(`{"text":"`+ message +`", "channel": "checkistrations", "as_user":true}`)
 
