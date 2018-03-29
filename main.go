@@ -1,7 +1,9 @@
 package main
 
 import (
+  "bufio"
   "os"
+  "os/exec"
 )
 
 const usage =
@@ -44,4 +46,28 @@ func main() {
 
   // always exit
   os.Exit(42)
+}
+
+func handleStdoutPipe(cmd *exec.Cmd) {
+  stdout, err := cmd.StdoutPipe()
+
+  err = cmd.Start()
+  handleError(err)
+
+  defer cmd.Wait()
+
+  buff := bufio.NewScanner(stdout)
+
+  go func() {
+    for buff.Scan() {
+      printPlain(buff.Text())
+    }
+  }()
+}
+
+func handleError(err error) {
+  if err != nil {
+    printFatal(err)
+    os.Exit(1)
+  }
 }
