@@ -24,7 +24,8 @@ The commands are:
 
 The flags are:
 
-      -s --skip-message     Do not post message to Slack.`
+      -s --skip-message                       Skips sending messages to Slack. Overrides -m or --message flags.
+      -m "<message>", --message "<message>"   Send a custom message. Replaces default message for the command given. This will also send a message even if the command typically is message-less.`
 
 func main() {
   if len(os.Args[1:]) < 1 {

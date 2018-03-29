@@ -5,7 +5,17 @@ func lunch(args []string) {
     printWarn("\u2757 Skipping Slack message")
   } else {
     printInfo("Posting message to Slack")
-    postMessage(":lunch:")
+    if Include(args, "-m") || Include(args, "--message") {
+      for i, v := range args {
+        if v == "-m" || v =="--message" {
+          value :=  args[i+1]
+          postMessage(value)
+        }
+        break
+      }
+    } else {
+      postMessage(":lunch:")
+    }
     printInfo("Message posted")
   }
   setPresence("away")

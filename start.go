@@ -9,7 +9,17 @@ func start(args []string) {
     printWarn("\u2757 Skipping Slack message")
   } else {
     printInfo("Posting message to Slack")
-    postMessage("Good morning! :city_sunrise:")
+    if Include(args, "-m") || Include(args, "--message") {
+      for i, v := range args {
+        if v == "-m" || v =="--message" {
+          value :=  args[i+1]
+          postMessage(value)
+        }
+        break
+      }
+    } else {
+      postMessage("Good morning! :city_sunrise:")
+    }
     printInfo("Message posted")
   }
   setStatus("Working Remotely", ":house_with_garden:")

@@ -7,7 +7,19 @@ func end(args []string) {
     printWarn("\u2757 Skipping Slack message")
   } else {
     printInfo("Posting message to Slack")
-    postMessage("Have a fantastic evening! Until next time... :woman-bowing:")
+
+    if Include(args, "-m") || Include(args, "--message") {
+      for i, v := range args {
+        if v == "-m" || v =="--message" {
+          value :=  args[i+1]
+          postMessage(value)
+        }
+        break
+      }
+    } else {
+      // default message
+      postMessage("Have a fantastic evening! Until next time... :woman-bowing:")
+    }
     printInfo("Message posted")
   }
   setPresence("away")
