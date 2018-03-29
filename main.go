@@ -19,6 +19,8 @@ The commands are:
       end       close down your system to end your day
       break     alert your team that you are on break
       lunch     alert your team that you are on lunch
+      away      set yourself away for headsdown time in Slack
+      return    global return to available in Slack
 
 The flags are:
 
@@ -40,6 +42,10 @@ func main() {
 		end(os.Args[2:])
 	case os.Args[1] == "lunch":
 		lunch(os.Args[2:])
+	case os.Args[1] == "away":
+		away(os.Args[2:])
+	case os.Args[1] == "return":
+		back(os.Args[2:])
   default:
     printPlain(usage)
   }
