@@ -7,8 +7,14 @@ import (
 )
 
 func start(args []string) {
+  if Include(args, "-s") || Include(args, "--skip-message") {
+    printWarn("\u2757 Skipping Slack message")
+  } else {
+    printInfo("Posting message to Slack")
+    postMessage("Good morning! :city_sunrise:")
+    printInfo("Message posted")
+  }
   setStatus("Working Remotely", ":house_with_garden:")
-  postMessage("Good morning! :city_sunrise:")
   setPresence("auto")
   boxUpgrade()
   boxUpdate()

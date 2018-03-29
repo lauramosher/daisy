@@ -16,7 +16,11 @@ The commands are:
       start     bootstrap your system to begin your day
       end       close down your system to end your day
       break     alert your team that you are on break
-      lunch     alert your team that you are on lunch`
+      lunch     alert your team that you are on lunch
+
+The flags are:
+
+      -s --skip-message     Do not post message to Slack.`
 
 func main() {
   if len(os.Args[1:]) < 1 {
