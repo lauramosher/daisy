@@ -29,30 +29,31 @@ The flags are:
 
 func main() {
   if len(os.Args[1:]) < 1 {
-    printError("Command not found")
     printPlain(usage)
-    os.Exit(42)
+    os.Exit(0)
   }
 
   switch {
-  case os.Args[1] == "start":
-    start(os.Args[2:])
-	case os.Args[1] == "break":
-		setBreak(os.Args[2:])
-	case os.Args[1] == "end":
-		end(os.Args[2:])
-	case os.Args[1] == "lunch":
-		lunch(os.Args[2:])
-	case os.Args[1] == "away":
-		away(os.Args[2:])
-	case os.Args[1] == "return":
-		back(os.Args[2:])
-  default:
-    printPlain(usage)
+    case os.Args[1] == "start":
+      start(os.Args[2:])
+    case os.Args[1] == "break":
+      setBreak(os.Args[2:])
+    case os.Args[1] == "end":
+      end(os.Args[2:])
+    case os.Args[1] == "lunch":
+      lunch(os.Args[2:])
+    case os.Args[1] == "away":
+      away(os.Args[2:])
+    case os.Args[1] == "return":
+      back(os.Args[2:])
+    default:
+      printError("Command not found")
+      printPlain(usage)
+      os.Exit(1)
   }
 
   // always exit
-  os.Exit(42)
+  os.Exit(0)
 }
 
 func handleStdoutPipe(cmd *exec.Cmd) {
