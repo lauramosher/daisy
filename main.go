@@ -7,7 +7,7 @@ import (
 )
 
 const usage =
-`dayrsk is your remote friendly Day Remote Starter Kit
+`daisy is your remote friendly Day Remote Starter Kit
 
 Usage:
 
