@@ -1,4 +1,4 @@
-package main
+package util
 
 import (
   "fmt"
@@ -14,35 +14,35 @@ const(
 )
 
 
-func printPlain(text string) {
+func PrintPlain(text string) {
   fmt.Println(text)
 }
 
-func printCallout(text string) {
+func PrintCallout(text string) {
   fmt.Printf(purple)
   fmt.Println(text)
   fmt.Printf(nc)
 }
 
-func printInfo(text string) {
+func PrintInfo(text string) {
   fmt.Printf(blue)
   fmt.Println(text)
   fmt.Printf(nc)
 }
 
-func printWarn(text string) {
+func PrintWarn(text string) {
   fmt.Printf(yellow)
   fmt.Println(text)
   fmt.Printf(nc)
 }
 
-func printError(text string) {
+func PrintError(text string) {
   fmt.Printf(red)
   fmt.Println(text)
   fmt.Printf(nc)
 }
 
-func printFatal(err error) {
+func PrintFatal(err error) {
   fmt.Printf(red)
   fmt.Println(err)
   fmt.Printf(nc)

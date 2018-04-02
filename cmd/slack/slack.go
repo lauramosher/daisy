@@ -1,24 +1,27 @@
-package main
+package slack
 
 import (
   "bytes"
+  "fmt"
   "net/http"
   "os"
 )
 
 var bearerToken = "Bearer " + os.Getenv("DAYSY_SLACK_USER_TOKEN")
 
-func useSlack() bool {
+func Slack() bool {
   if len(os.Getenv("DAYSY_SLACK_USER_TOKEN")) == 0 {
-		printError("\u2757  Missing user token. Please see install instructions.")
+    fmt.Printf("\033[0;31m")
+    fmt.Println("\u2527  Missing user token. Please see install instructions.")
+    fmt.Printf("\033[0m")
     return false
   }
   // TODO: flip this to true
   return true
 }
 
-func setPresence(state string) {
-  if useSlack() == false {
+func SetPresence(state string) {
+  if Slack() == false {
     return
   }
   url := "https://slack.com/api/users.setPresence"
@@ -36,8 +39,8 @@ func setPresence(state string) {
   defer resp.Body.Close()
 }
 
-func setStatus(status string, emoji string) {
-  if useSlack() == false {
+func SetStatus(status string, emoji string) {
+  if Slack() == false {
     return
   }
   url := "https://slack.com/api/users.profile.set"
@@ -55,8 +58,8 @@ func setStatus(status string, emoji string) {
   defer resp.Body.Close()
 }
 
-func postMessage(message string) {
-  if useSlack() == false {
+func PostMessage(message string) {
+  if Slack() == false {
     return
   }
   url := "https://slack.com/api/chat.postMessage"

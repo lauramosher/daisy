@@ -1,4 +1,4 @@
-package main
+package util
 
 func Index(vs []string, t string) int {
   for i, v := range vs {

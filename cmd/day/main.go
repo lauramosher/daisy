@@ -4,6 +4,8 @@ import (
   "bufio"
   "os"
   "os/exec"
+
+  "github.com/lauramosher/daisy/cmd/util"
 )
 
 const usage =
@@ -29,7 +31,7 @@ The flags are:
 
 func main() {
   if len(os.Args[1:]) < 1 {
-    printPlain(usage)
+    util.PrintPlain(usage)
     os.Exit(0)
   }
 
@@ -47,8 +49,8 @@ func main() {
     case os.Args[1] == "return":
       back(os.Args[2:])
     default:
-      printError("Command not found")
-      printPlain(usage)
+      util.PrintError("Command not found")
+      util.PrintPlain(usage)
       os.Exit(1)
   }
 
@@ -68,14 +70,14 @@ func handleStdoutPipe(cmd *exec.Cmd) {
 
   go func() {
     for buff.Scan() {
-      printPlain(buff.Text())
+      util.PrintPlain(buff.Text())
     }
   }()
 }
 
 func handleError(err error) {
   if err != nil {
-    printFatal(err)
+    util.PrintFatal(err)
     os.Exit(1)
   }
 }
