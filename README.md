@@ -7,6 +7,16 @@ Slack to enables message posting, set status, and presence.
 The idea is to streamline the day. You open your terminal to code, and you can let your team know
 what you are doing by setting your status.
 
+## Install
+
+```
+$ go get github.com/lauramosher/daisy/cmd/day
+$ go install github.com/lauramosher/daisy/cmd/day
+```
+
+### Enable Slack Integration
+
+
 ## Usage
 
 `day` will print usage.

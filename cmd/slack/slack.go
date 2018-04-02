@@ -7,12 +7,12 @@ import (
   "os"
 )
 
-var bearerToken = "Bearer " + os.Getenv("DAYSY_SLACK_USER_TOKEN")
+var bearerToken = "Bearer " + os.Getenv("DAISY_SLACK_USER_TOKEN")
 
 func Slack() bool {
-  if len(os.Getenv("DAYSY_SLACK_USER_TOKEN")) == 0 {
+  if len(os.Getenv("DAISY_SLACK_USER_TOKEN")) == 0 {
     fmt.Printf("\033[0;31m")
-    fmt.Println("\u2527  Missing user token. Please see install instructions.")
+    fmt.Println("\u2527  Missing user token. Please see Slack Integration for installation instructions.")
     fmt.Printf("\033[0m")
     return false
   }
