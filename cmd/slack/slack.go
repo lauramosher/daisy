@@ -16,7 +16,6 @@ func Slack() bool {
     fmt.Printf("\033[0m")
     return false
   }
-  // TODO: flip this to true
   return true
 }
 
