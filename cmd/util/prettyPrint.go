@@ -30,6 +30,12 @@ func PrintInfo(text string) {
   fmt.Printf(nc)
 }
 
+func PrintClear(text string) {
+  fmt.Printf(green)
+  fmt.Println(text)
+  fmt.Printf(nc)
+}
+
 func PrintWarn(text string) {
   fmt.Printf(yellow)
   fmt.Println(text)
