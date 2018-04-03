@@ -14,8 +14,8 @@ $ go get github.com/lauramosher/daisy/cmd/day
 $ go install github.com/lauramosher/daisy/cmd/day
 ```
 
-### Enable Slack Integration
-
+[Authorize Slack](https://daisy-slack.herokuapp.com/) to take advantage of daisy's Slack integration.
+daisy will post messages as you, and manipulate your Status and Presence.
 
 ## Usage
 
