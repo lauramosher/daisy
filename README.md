@@ -46,3 +46,13 @@ To install latest updates:
 ```
 go get -u github.com/lauramosher/daisy/cmd/day
 ```
+
+## Troubleshooting
+
+> `day` command isn't working!
+
+Ensure Go's bin is in your path:
+
+```
+export PATH=$GOPATH/bin:$PATH
+```
