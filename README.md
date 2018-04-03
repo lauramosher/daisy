@@ -37,3 +37,12 @@ daisy will post messages as you, and manipulate your Status and Presence.
 | --- | --- |
 | -s, --skip-message | Skip the default posting of message on any command. |
 | -m <text>, --message <text> | Specify message to post. This will also post a message for any command, even if there are no default set. |
+
+
+### Update
+
+To install latest updates:
+
+```
+go get -u github.com/lauramosher/daisy/cmd/day
+```
