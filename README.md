@@ -9,6 +9,16 @@ what you are doing by setting your status.
 
 ## Install
 
+Run the following command. It'll prompt you when necessary.
+
+```
+bash <(curl -sL https://raw.githubusercontent.com/lauramosher/daisy/master/install.sh)
+```
+
+NOTE: This will always install the latest version.
+
+### Alternatively, from source
+
 ```
 $ go get github.com/lauramosher/daisy/cmd/day
 $ go install github.com/lauramosher/daisy/cmd/day
@@ -16,6 +26,12 @@ $ go install github.com/lauramosher/daisy/cmd/day
 
 [Authorize Slack](https://daisy-slack.herokuapp.com/) to take advantage of daisy's Slack integration.
 daisy will post messages as you, and manipulate your Status and Presence.
+
+#### Requirements
+
+- Go
+- $GOPATH set
+- $GOPATH/bin in your path
 
 ## Usage
 
