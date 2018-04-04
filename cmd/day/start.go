@@ -27,15 +27,14 @@ func start(args []string) {
   }
   slack.SetStatus("Working Remotely", ":house_with_garden:")
   slack.SetPresence("auto")
-  boxUpgrade()
-  boxUpdate()
+  boxUpdateApps()
   boxStart()
 }
 
-func boxUpdate() {
-  util.PrintInfo("box update")
+func boxUpdateApps() {
+  util.PrintInfo("box update-apps")
 
-  cmd := exec.Command("box", "update")
+  cmd := exec.Command("box", "update-apps")
   handleStdoutPipe(cmd)
 }
 
