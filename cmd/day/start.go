@@ -32,7 +32,7 @@ func start(args []string) {
   slack.SetPresence("auto")
   util.PrintClear("Done!\n")
 
-  util.PrintPlain("Running PCO commands...\t\t\t\t")
+  util.PrintPlain("Running PCO commands...\n")
   boxUpdateApps()
   boxStart()
 
