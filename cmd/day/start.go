@@ -1,7 +1,9 @@
 package main
 
 import (
+  "bufio"
   "os/exec"
+  "regexp"
 
   "github.com/lauramosher/daisy/cmd/slack"
   "github.com/lauramosher/daisy/cmd/util"
@@ -42,7 +44,34 @@ func boxStart() {
   util.PrintInfo("box start")
 
   cmd := exec.Command("box", "start")
-  handleStdoutPipe(cmd)
+
+  stdout, err := cmd.StdoutPipe()
+
+  err = cmd.Start()
+  handleError(err)
+
+  defer cmd.Wait()
+
+  buff := bufio.NewScanner(stdout)
+  updateBox := false
+
+  go func() {
+    for buff.Scan() {
+      util.PrintPlain(buff.Text())
+
+      matched, err := regexp.MatchString("You should upgrade", buff.Text())
+      handleError(err)
+      if matched {
+        updateBox = true
+        util.PrintWarn("Aborting to update PCO Box")
+        break
+      }
+    }
+
+    if updateBox {
+      boxUpgrade()
+    }
+  }()
 }
 
 func boxUpgrade() {
