@@ -61,8 +61,16 @@ func PostMessage(message string) {
   if Slack() == false {
     return
   }
+
+  if len(os.Getenv("DAISY_SLACK_CHANNEL")) == 0 {
+    fmt.Printf("\033[0;31m")
+    fmt.Println("Missing Slack channel. Add DAISY_SLACK_CHANNEL to your env to enable posting of messages.")
+    fmt.Printf("\033[m")
+    return
+  }
+
   url := "https://slack.com/api/chat.postMessage"
-  var jsonStr = []byte(`{"text":"`+ message +`", "channel": "checkistrations", "as_user":true}`)
+  var jsonStr = []byte(`{"text":"`+ message +`", "channel": "` + os.Getenv("DAISY_SLACK_CHANNEL") + `", "as_user":true}`)
 
   req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
   req.Header.Set("Authorization", bearerToken)

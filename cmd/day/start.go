@@ -1,7 +1,9 @@
 package main
 
 import (
+  "bufio"
   "os/exec"
+  "regexp"
 
   "github.com/lauramosher/daisy/cmd/slack"
   "github.com/lauramosher/daisy/cmd/util"
@@ -27,15 +29,14 @@ func start(args []string) {
   }
   slack.SetStatus("Working Remotely", ":house_with_garden:")
   slack.SetPresence("auto")
-  boxUpgrade()
-  boxUpdate()
+  boxUpdateApps()
   boxStart()
 }
 
-func boxUpdate() {
-  util.PrintInfo("box update")
+func boxUpdateApps() {
+  util.PrintInfo("box update-apps")
 
-  cmd := exec.Command("box", "update")
+  cmd := exec.Command("box", "update-apps")
   handleStdoutPipe(cmd)
 }
 
@@ -43,13 +44,39 @@ func boxStart() {
   util.PrintInfo("box start")
 
   cmd := exec.Command("box", "start")
-  handleStdoutPipe(cmd)
+
+  stdout, err := cmd.StdoutPipe()
+
+  err = cmd.Start()
+  handleError(err)
+
+  defer cmd.Wait()
+
+  buff := bufio.NewScanner(stdout)
+  updateBox := false
+
+  go func() {
+    for buff.Scan() {
+      util.PrintPlain(buff.Text())
+
+      matched, err := regexp.MatchString("You should upgrade", buff.Text())
+      handleError(err)
+      if matched {
+        updateBox = true
+        util.PrintWarn("Aborting to update PCO Box")
+        break
+      }
+    }
+
+    if updateBox {
+      boxUpgrade()
+    }
+  }()
 }
 
 func boxUpgrade() {
   util.PrintInfo("Upgrading pco-box")
 
-  // look into os.Getenv("HOME")
   cmd := exec.Command("sh", "-c", "cd $HOME/pco-box && git pull && bin/box update")
   handleStdoutPipe(cmd)
 }
