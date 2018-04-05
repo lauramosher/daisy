@@ -11,7 +11,7 @@ func end(args []string) {
   if util.Include(args, "-s") || util.Include(args, "--skip-message") {
     util.PrintWarn("\u2757 Skipping Slack message")
   } else {
-    util.PrintInfo("Posting message to Slack")
+    util.PrintPlain("Posting message to Slack\t\t")
 
     if util.Include(args, "-m") || util.Include(args, "--message") {
       for i, v := range args {
@@ -25,17 +25,22 @@ func end(args []string) {
       // default message
       slack.PostMessage("Have a fantastic evening! Until next time... :woman-bowing:")
     }
-    util.PrintInfo("Message posted")
+    util.PrintClear("Done!\n")
   }
+
+  util.PrintPlain("Setting Slack status & presence...\t")
   slack.SetPresence("away")
   slack.SetStatus("EOD", ":hedgehog:")
+  util.PrintClear("Done!\n")
 
+  util.PrintPlain("Stopping box...\n")
   boxStop()
+  util.PrintClear("Done!\n")
+
+  util.PrintCallout("Have a good evening! :)\n")
 }
 
 func boxStop() {
-  util.PrintInfo("box stop")
-
   cmd := exec.Command("box", "stop")
   handleStdoutPipe(cmd)
 }
