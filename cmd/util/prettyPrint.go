@@ -15,41 +15,41 @@ const(
 
 
 func PrintPlain(text string) {
-  fmt.Println(text)
+  fmt.Print(text)
 }
 
 func PrintCallout(text string) {
   fmt.Printf(purple)
-  fmt.Println(text)
+  fmt.Print(text)
   fmt.Printf(nc)
 }
 
 func PrintInfo(text string) {
   fmt.Printf(blue)
-  fmt.Println(text)
+  fmt.Print(text)
   fmt.Printf(nc)
 }
 
 func PrintClear(text string) {
   fmt.Printf(green)
-  fmt.Println(text)
+  fmt.Print(text)
   fmt.Printf(nc)
 }
 
 func PrintWarn(text string) {
   fmt.Printf(yellow)
-  fmt.Println(text)
+  fmt.Print(text)
   fmt.Printf(nc)
 }
 
 func PrintError(text string) {
   fmt.Printf(red)
-  fmt.Println(text)
+  fmt.Print(text)
   fmt.Printf(nc)
 }
 
 func PrintFatal(err error) {
   fmt.Printf(red)
-  fmt.Println(err)
+  fmt.Print(err)
   fmt.Printf(nc)
 }
