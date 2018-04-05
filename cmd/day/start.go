@@ -41,15 +41,11 @@ func start(args []string) {
 }
 
 func boxUpdateApps() {
-  util.PrintInfo("box update-apps")
-
   cmd := exec.Command("box", "update-apps")
   handleStdoutPipe(cmd)
 }
 
 func boxStart() {
-  util.PrintInfo("box start")
-
   cmd := exec.Command("box", "start")
 
   stdout, err := cmd.StdoutPipe()
@@ -64,13 +60,13 @@ func boxStart() {
 
   go func() {
     for buff.Scan() {
-      util.PrintPlain(buff.Text())
+      util.PrintPlain(buff.Text() + "\n")
 
       matched, err := regexp.MatchString("You should upgrade", buff.Text())
       handleError(err)
       if matched {
         updateBox = true
-        util.PrintWarn("Aborting to update PCO Box")
+        util.PrintWarn("Aborting to update PCO Box\n")
         break
       }
     }
