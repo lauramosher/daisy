@@ -9,7 +9,7 @@ func lunch(args []string) {
   if util.Include(args, "-s") || util.Include(args, "--skip-message") {
     util.PrintWarn("\u2757 Skipping Slack message")
   } else {
-    util.PrintInfo("Posting message to Slack")
+    util.PrintPlain("Posting message to Slack\t\t\t")
     if util.Include(args, "-m") || util.Include(args, "--message") {
       for i, v := range args {
         if v == "-m" || v =="--message" {
@@ -21,8 +21,13 @@ func lunch(args []string) {
     } else {
       slack.PostMessage(":lunch:")
     }
-    util.PrintInfo("Message posted")
+    util.PrintClear("Done!\n")
   }
+
+  util.PrintPlain("Setting Slack status & presence...\t\t")
   slack.SetPresence("away")
   slack.SetStatus("om nom nom", ":lunch:")
+  util.PrintClear("Done!\n")
+
+  util.PrintCallout("Enjoy your lunch! Om nom nom...\n")
 }
