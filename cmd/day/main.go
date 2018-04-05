@@ -70,7 +70,7 @@ func handleStdoutPipe(cmd *exec.Cmd) {
 
   go func() {
     for buff.Scan() {
-      util.PrintPlain(buff.Text())
+      util.PrintPlain(buff.Text() +"\n")
     }
   }()
 }
