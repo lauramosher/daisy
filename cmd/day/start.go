@@ -77,7 +77,6 @@ func boxStart() {
 func boxUpgrade() {
   util.PrintInfo("Upgrading pco-box")
 
-  // look into os.Getenv("HOME")
   cmd := exec.Command("sh", "-c", "cd $HOME/pco-box && git pull && bin/box update")
   handleStdoutPipe(cmd)
 }
