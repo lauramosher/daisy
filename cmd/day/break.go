@@ -8,8 +8,11 @@ import (
 )
 
 func setBreak(args []string) {
-  util.PrintPlain("Setting Slack status & Presence...\t\t")
+  util.PrintPlain("Setting Slack presence...\t\t")
   slack.SetPresence("away")
+  util.PrintClear("Done!\n")
+
+  util.PrintPlain("Setting Slack status...\t\t\t")
   if time.Now().Hour() > 12 {
     slack.SetStatus("Afternoon Tea", ":tea:")
   } else {
@@ -18,7 +21,7 @@ func setBreak(args []string) {
   util.PrintClear("Done!\n")
 
   if util.Include(args, "-m") || util.Include(args, "--message") {
-    util.PrintPlain("Posting message to Slack...\t\t\t")
+    util.PrintPlain("Posting message to Slack...\t\t")
     for i, v := range args {
       if v == "-m" || v =="--message" {
         value :=  args[i+1]
