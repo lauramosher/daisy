@@ -9,9 +9,7 @@ import (
 )
 
 const usage =
-`daisy is your remote friendly Day Remote Starter Kit
-
-Usage:
+`Usage:
 
       day command [arguments]
 
@@ -31,7 +29,7 @@ The flags are:
 
 func main() {
   if len(os.Args[1:]) < 1 {
-    util.PrintPlain(usage)
+    util.PrintPlain(usage + "\n")
     os.Exit(0)
   }
 
@@ -51,8 +49,8 @@ func main() {
     case os.Args[1] == "version" || os.Args[1] == "-v":
       util.PrintPlain("daisy version 0.2.0\n")
     default:
-      util.PrintError("Command not found")
-      util.PrintPlain(usage)
+      util.PrintError("Command not found\n")
+      util.PrintPlain(usage + "\n")
       os.Exit(1)
   }
 
