@@ -11,9 +11,9 @@ import (
 
 func start(args []string) {
   if util.Include(args, "-s") || util.Include(args, "--skip-message") {
-    util.PrintWarn("\u2757 Skipping Slack message")
+    util.PrintWarn("\u2757 Skipping Slack message\n")
   } else {
-    util.PrintInfo("Posting message to Slack")
+    util.PrintPlain("Posting message to Slack...\t\t")
     if util.Include(args, "-m") || util.Include(args, "--message") {
       for i, v := range args {
         if v == "-m" || v =="--message" {
@@ -25,24 +25,31 @@ func start(args []string) {
     } else {
       slack.PostMessage("Good morning! :city_sunrise:")
     }
-    util.PrintInfo("Message posted")
+    util.PrintClear("Done!\n")
   }
-  slack.SetStatus("Working Remotely", ":house_with_garden:")
+
+  util.PrintPlain("Setting Slack presence...\t\t")
   slack.SetPresence("auto")
+  util.PrintClear("Done!\n")
+
+  util.PrintPlain("Setting Slack status...\t\t\t")
+  slack.SetStatus("Working Remotely", ":house_with_garden:")
+  util.PrintClear("Done!\n")
+
+  util.PrintPlain("Running PCO commands...\n")
   boxUpdateApps()
   boxStart()
+
+  util.PrintClear("Done!\n")
+  util.PrintCallout("Good morning! Have a fantastic day today!\n")
 }
 
 func boxUpdateApps() {
-  util.PrintInfo("box update-apps")
-
   cmd := exec.Command("box", "update-apps")
   handleStdoutPipe(cmd)
 }
 
 func boxStart() {
-  util.PrintInfo("box start")
-
   cmd := exec.Command("box", "start")
 
   stdout, err := cmd.StdoutPipe()
@@ -57,13 +64,13 @@ func boxStart() {
 
   go func() {
     for buff.Scan() {
-      util.PrintPlain(buff.Text())
+      util.PrintPlain(buff.Text() + "\n")
 
       matched, err := regexp.MatchString("You should upgrade", buff.Text())
       handleError(err)
       if matched {
         updateBox = true
-        util.PrintWarn("Aborting to update PCO Box")
+        util.PrintWarn("Aborting to update PCO Box\n")
         break
       }
     }
