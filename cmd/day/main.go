@@ -48,6 +48,8 @@ func main() {
       away(os.Args[2:])
     case os.Args[1] == "return":
       back(os.Args[2:])
+    case os.Args[1] == "version" || os.Args[1] == "-v":
+      util.PrintPlain("daisy version 0.2.0\n")
     default:
       util.PrintError("Command not found")
       util.PrintPlain(usage)
