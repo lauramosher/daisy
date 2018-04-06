@@ -9,7 +9,7 @@ import (
 
 func end(args []string) {
   if util.Include(args, "-s") || util.Include(args, "--skip-message") {
-    util.PrintWarn("\u2757 Skipping Slack message")
+    util.PrintWarn("\u2757 Skipping Slack message\n")
   } else {
     util.PrintPlain("Posting message to Slack\t\t")
 
