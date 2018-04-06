@@ -1,6 +1,6 @@
 #!/bin/sh
 
-printf "\033[0;36m\xF0\x9F\x94\x91 Installing Daisy\033[m\n"
+printf "\033[0;36m\xF0\x9F\x94\x91  Installing Daisy\033[m\n"
 
 printf "   Fetching latest release binary..."
 cd /usr/local/bin && { curl -OLs https://github.com/lauramosher/daisy/releases/download/v0.2.0/day ; cd $OLDPWD ; }
@@ -18,7 +18,7 @@ echo "   Configuring Slack Integation..."
 if [[ -z $DAISY_SLACK_USER_TOKEN ]]
 then
   printf "\033[1;35m"
-  echo "\xE2\x9A\xA0  Daisy needs to permission to post as you in Slack\n"
+  printf "\xE2\x9A\xA0  Daisy needs to permission to post as you in Slack\n"
   printf "\033[1;36m"
 
   printf "   --------------------------------------------------------------------------\n"
