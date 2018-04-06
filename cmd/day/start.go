@@ -13,7 +13,7 @@ func start(args []string) {
   if util.Include(args, "-s") || util.Include(args, "--skip-message") {
     util.PrintWarn("\u2757 Skipping Slack message\n")
   } else {
-    util.PrintPlain("Posting message to Slack...\t\t\t")
+    util.PrintPlain("Posting message to Slack...\t\t")
     if util.Include(args, "-m") || util.Include(args, "--message") {
       for i, v := range args {
         if v == "-m" || v =="--message" {
@@ -27,9 +27,13 @@ func start(args []string) {
     }
     util.PrintClear("Done!\n")
   }
-  util.PrintPlain("Setting Slack status & presence...\t\t")
-  slack.SetStatus("Working Remotely", ":house_with_garden:")
+
+  util.PrintPlain("Setting Slack presence...\t\t")
   slack.SetPresence("auto")
+  util.PrintClear("Done!\n")
+
+  util.PrintPlain("Setting Slack status...\t\t\t")
+  slack.SetStatus("Working Remotely", ":house_with_garden:")
   util.PrintClear("Done!\n")
 
   util.PrintPlain("Running PCO commands...\n")
@@ -37,7 +41,7 @@ func start(args []string) {
   boxStart()
 
   util.PrintClear("Done!\n")
-  util.PrintCallout("Good morning! Have a fantastic day today!")
+  util.PrintCallout("Good morning! Have a fantastic day today!\n")
 }
 
 func boxUpdateApps() {
